@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - TSA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1 id="greeting">Xin chào</h1>
+    <div id="exam-list" class="exam-grid">
+      <!-- Danh sách đề thi sẽ hiển thị ở đây -->
+    </div>
+    <button onclick="logout()">Đăng xuất</button>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const role = urlParams.get('role');
+
+    document.getElementById('greeting').innerText = role === 'admin'
+      ? "Chào Admin, chọn hành động:"
+      : "Chào thí sinh, chọn đề để làm bài:";
+
+    const examList = document.getElementById('exam-list');
+
+    const sampleExams = [
+      { id: 1, title: "TSA Demo 01", image: "https://i.imgur.com/JmQ2eSZ.png" },
+      { id: 2, title: "TSA Demo 02", image: "https://i.imgur.com/LE2g6Jw.png" }
+    ];
+
+    sampleExams.forEach(exam => {
+      const examCard = document.createElement('div');
+      examCard.className = "exam-card";
+      examCard.innerHTML = `
+        <img src="${exam.image}" alt="Exam">
+        <h3>${exam.title}</h3>
+        <button onclick="startExam(${exam.id})">Bắt đầu</button>
+      `;
+      examList.appendChild(examCard);
+    });
+
+    function startExam(id) {
+      window.location.href = `exam.html?examId=${id}`;
+    }
+
+    function logout() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
