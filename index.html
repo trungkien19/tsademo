@@ -1,21 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Login - TSA Platform</title>
-  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, updatePassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAsfBJA9CfiWzLVZddrwK8tUqOzDITlJm8",
+      authDomain: "tsa-trungkien.firebaseapp.com",
+      projectId: "tsa-trungkien",
+      storageBucket: "tsa-trungkien.appspot.com",
+      messagingSenderId: "954115122394",
+      appId: "1:954115122394:web:3348a44415ad945bfb31e3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.login = function () {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const result = document.getElementById("login-result");
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          if (email === "admin@gmail.com") {
+            window.location.href = "admin-panel.html";
+          } else {
+            window.location.href = "dashboard.html";
+          }
+        })
+        .catch((error) => {
+          result.innerText = `❌ Đăng nhập thất bại: ${error.message}`;
+        });
+    };
+  </script>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Đăng nhập TSA</h2>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Mật khẩu">
-    <button onclick="login()">Đăng nhập</button>
-    <p id="error" style="color: red;"></p>
-  </div>
-
-  <script type="module" src="firebase-config.js"></script>
-  <script type="module" src="auth.js"></script>
+  <h2>Đăng nhập TSA</h2>
+  <input type="text" id="email" placeholder="Email"><br><br>
+  <input type="password" id="password" placeholder="Mật khẩu"><br><br>
+  <button onclick="login()">Đăng nhập</button>
+  <p id="login-result"></p>
 </body>
 </html>
