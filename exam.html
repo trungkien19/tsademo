@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Phòng thi TSA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="exam-container">
+    <div class="sidebar">
+      <h2>Thời gian còn lại</h2>
+      <div id="timer">--:--</div>
+      <h3>Câu hỏi</h3>
+      <div id="question-nav"></div>
+      <button onclick="submitExam()">Nộp bài</button>
+    </div>
+
+    <div class="question-area">
+      <h2 id="question-title">Đang tải câu hỏi...</h2>
+      <div id="options"></div>
+      <div class="navigation-buttons">
+        <button onclick="prevQuestion()">← Trước</button>
+        <button onclick="nextQuestion()">Sau →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="exam.js"></script>
+</body>
+</html>
