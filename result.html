@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kết quả thi TSA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="result-container">
+    <h1>Kết quả bài thi</h1>
+    <p id="score"></p>
+    <button onclick="window.location.href='dashboard.html'">Quay lại trang chính</button>
+  </div>
+
+  <script>
+    const score = localStorage.getItem("score");
+    const total = localStorage.getItem("total");
+    document.getElementById("score").innerText = `Bạn đã đúng ${score}/${total} câu.`;
+  </script>
+</body>
+</html>
